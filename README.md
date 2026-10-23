@@ -172,6 +172,30 @@ https://www.thingiverse.com/thing:3502645
 https://www.thingiverse.com/thing:4609317  
 https://www.tinkercad.com/things/b0GQwqVYNPP
 
+# Scaling and Aspect Ratio
+
+The dock upscales the Vita image to your TV. You can choose how from a terminal (`x-terminal-emulator`). The setting is saved in `vitadock.conf` and the viewer restarts automatically.
+
+`/home/pi/scalemode.sh <mode>`
+
+| Mode       | Description                                                                                         |
+| ---------- | --------------------------------------------------------------------------------------------------- |
+| `lanczos`  | Previous default. Smooth but soft, and the heaviest on slower Pis.                                  |
+| `pixel`    | Sharp pixels with only the edges smoothed (like sharp-bilinear). Recommended for a crisp image.     |
+| `catmull`  | Sharper edges than lanczos at a much lower cost.                                                    |
+| `bilinear` | Cheapest and softest.                                                                               |
+| `nearest`  | No smoothing at all. Crisp, but pixels are uneven at non-integer scales.                            |
+
+`/home/pi/aspectmode.sh <fit|stretch|crop>`
+
+| Mode      | Description                                                         |
+| --------- | ------------------------------------------------------------------- |
+| `fit`     | Keep the Vita aspect ratio with black bars where needed. (default)  |
+| `stretch` | Fill the whole screen, ignoring aspect ratio.                       |
+| `crop`    | Keep the aspect ratio and fill the screen, cutting off the overflow.|
+
+The same values can be set directly with `SCALE_MODE` and `ASPECT_MODE` in `vitadock.conf`. Missing or unknown values behave like the previous release (`lanczos` and `fit`).
+
 # Performance Tips
 
 Overclocking and disabling Bluetooth on low powered Pis can also help. Good starting overclock values:
